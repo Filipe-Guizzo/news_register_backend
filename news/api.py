@@ -141,7 +141,7 @@ def delete(request, id: int):
             'error': str(e)
         }
 
-@router.post('/{id}/upload-file', response={200: NewsSchema, 400: MessageSchema})
+@router.post('/{id}/upload-file/', response={200: NewsSchema, 400: MessageSchema})
 def upload_file(request, id: int, file: UploadedFile = File(...)):
     try:
         news = News.objects.get(id=id)
