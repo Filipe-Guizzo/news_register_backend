@@ -1,5 +1,5 @@
 from django.db import models
-
+from config import settings
 class Person(models.Model):
     SEX_CHOICES = (
         ('M', 'Masculine'),
@@ -12,7 +12,7 @@ class Person(models.Model):
     email = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     token = models.CharField(max_length=500)
-    photo = models.ImageField(upload_to="", blank=True, null=True)
+    photo = models.ImageField(upload_to="", blank=True, null=True, default=f'{settings.MEDIA_ROOT}/default.png')
     dt_create = models.DateField(auto_created=True, auto_now_add=True, blank=True, null=True)
     dt_update = models.DateField(auto_created=True, auto_now=True, blank=True, null=True)
 

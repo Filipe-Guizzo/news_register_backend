@@ -21,7 +21,7 @@ router = Router()
 @router.get('/', response={200: List[CategorySchema], 400: MessageSchema})
 def get_all(request):
     try:
-        categorys = Category.objects.all()
+        categorys = Category.objects.all().order_by('id')
             
         return 200, categorys
     except Exception as e:

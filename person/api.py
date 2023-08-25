@@ -32,7 +32,7 @@ router = Router()
 @router.get('/', response={200: List[PersonSchema], 400: MessageSchema}, auth=AuthBearer())
 def get_all(request):
     try:
-        persons = Person.objects.all()
+        persons = Person.objects.all().order_by('id')
         return 200,persons
     except Exception as e:
         return 400, {

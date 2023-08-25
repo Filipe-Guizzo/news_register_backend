@@ -31,7 +31,7 @@ router = Router()
 @router.get('/', response={200: List[NewsSchema], 400: MessageSchema})
 def get_all(request):
     try:
-        news = News.objects.all()
+        news = News.objects.all().order_by('id')
             
         return 200, news
     except Exception as e:
@@ -62,7 +62,7 @@ def search(request):
             Q(person__name__istartswith=person) |
             Q(dt_create=dt_create) |
             Q(dt_update=dt_update)
-        )
+        ).order_by('id')
         return 200, news
     except Exception as e:
         return 404, {

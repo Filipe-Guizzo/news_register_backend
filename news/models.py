@@ -1,13 +1,14 @@
 from django.db import models
 from person.models import Person
 from category.models import Category
+from config import settings
 
 class News(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50)
     subtitle = models.CharField(max_length=50, blank=True, null=True)
     content = models.CharField(max_length=150)
-    photo = models.ImageField(upload_to="", blank=True, null=True)
+    photo = models.ImageField(upload_to="", blank=True, null=True, default=f'{settings.MEDIA_ROOT}/default.png')
     category = models.ForeignKey(Category, models.DO_NOTHING, db_column='id_category')
     person = models.ForeignKey(Person, models.DO_NOTHING, db_column='id_person')
     dt_create = models.DateField(auto_now_add=True)
